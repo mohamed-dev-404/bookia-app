@@ -1,5 +1,5 @@
-abstract class CacheKeys {
-  CacheKeys._();
+class SecureStorageKeys {
+  SecureStorageKeys._();
 
   static const String refreshToken = 'refreshToken';
   static const String accessToken = 'accessToken';

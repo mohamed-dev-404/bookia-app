@@ -1,4 +1,4 @@
-import 'package:bookia/core/constants/cache_keys.dart';
+import 'package:bookia/core/cache/secure_storage/secure_cache_keys.dart';
 import 'package:bookia/core/helper/app_logger.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -30,7 +30,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class SecureStorageService {
   static final SecureStorageService instance = SecureStorageService._internal();
 
-  SecureStorageService._internal();// Private constructor for singleton pattern
+  SecureStorageService._internal(); // Private constructor for singleton pattern
 
   static const FlutterSecureStorage _storage = FlutterSecureStorage();
 
@@ -91,41 +91,41 @@ class SecureStorageService {
 
   //* Save access token
   Future<void> saveAccessToken(String token) async {
-    await setString(CacheKeys.accessToken, token);
+    await setString(SecureStorageKeys.accessToken, token);
   }
 
   //* Get access token
   Future<String?> getAccessToken() async {
-    return getString(CacheKeys.accessToken);
+    return getString(SecureStorageKeys.accessToken);
   }
 
   //* Delete access token
   Future<void> deleteAccessToken() async {
-    await remove(CacheKeys.accessToken);
+    await remove(SecureStorageKeys.accessToken);
   }
 
   //* Save refresh token
   Future<void> saveRefreshToken(String token) async {
-    await setString(CacheKeys.refreshToken, token);
+    await setString(SecureStorageKeys.refreshToken, token);
   }
 
   //* Get refresh token
   Future<String?> getRefreshToken() async {
-    return getString(CacheKeys.refreshToken);
+    return getString(SecureStorageKeys.refreshToken);
   }
 
   //* Delete refresh token
   Future<void> deleteRefreshToken() async {
-    await remove(CacheKeys.refreshToken);
+    await remove(SecureStorageKeys.refreshToken);
   }
 
   //* Save user role
   Future<void> saveUserRole(String role) async {
-    await setString(CacheKeys.role, role);
+    await setString(SecureStorageKeys.role, role);
   }
 
   //* Get user role
   Future<String?> getUserRole() async {
-    return getString(CacheKeys.role);
+    return getString(SecureStorageKeys.role);
   }
 }
