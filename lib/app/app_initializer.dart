@@ -1,8 +1,7 @@
-import 'package:bookia/core/cache/secure_storage.dart';
-import 'package:bookia/core/cache/shared_pref_helper.dart';
+import 'package:bookia/core/cache/secure_storage/secure_storage_service.dart';
+import 'package:bookia/core/cache/shred_pref/shared_pref_service.dart';
 import 'package:bookia/core/services/service_locator.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get_storage/get_storage.dart';
 import '../core/helper/app_logger.dart';
 
 class AppInitializer {
@@ -17,7 +16,7 @@ class AppInitializer {
       _initLogger();
 
       //* (2) Initialize app storage systems
-      // GetStorage, SharedPreferences, SecureStorage
+      // SharedPreferences, SecureStorage
       await _initAppStorage();
 
       //* (3) Setup service locator (GetIt)
@@ -45,28 +44,17 @@ class AppInitializer {
   //! Private helper methods
   //! =========================
   static Future<void> _initAppStorage() async {
-    // (1) Initialize GetStorage
-    await _initGetStorage();
-
-    // (2) Initialize SharedPreferences
+    // (1) Initialize SharedPreferences
     await _initSharedPreferences();
 
-    /// (3) Check that secure storage is available
+    /// (2) Check that secure storage is available
     await SecureStorageService.instance.init();
-  }
-
-  /// Initializes [GetStorage]
-  /// Used for simple fast key-value local storage
-  static Future<void> _initGetStorage() async {
-    await GetStorage.init();
-
-    AppLogger.success('GetStorage initialized successfully', tag: 'GetStorage');
   }
 
   /// Initializes [SharedPreferences] using your helper
   /// Used for lightweight cached data (flags, settings, etc.)
   static Future<void> _initSharedPreferences() async {
-    await SharedPrefHelper.init();
+    await SharedPrefService.init();
 
     AppLogger.success(
       'SharedPreferences initialized successfully',

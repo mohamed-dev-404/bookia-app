@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefHelper {
-  SharedPrefHelper._(); // Private constructor to prevent instantiation
+class SharedPrefService {
+  SharedPrefService._(); // Private constructor to prevent instantiation
 
   static late SharedPreferences _sharedPreferences;
   //! Here The Initialize of cache (call it in main)

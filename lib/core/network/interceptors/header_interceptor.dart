@@ -1,4 +1,4 @@
-import 'package:bookia/core/cache/secure_storage.dart';
+import 'package:bookia/core/cache/secure_storage/secure_storage_service.dart';
 import 'package:bookia/core/constants/api_keys.dart';
 import 'package:dio/dio.dart';
 

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:bookia/core/utils/styles/app_styles.dart';
+import 'package:bookia/core/routes/app_router.dart';
 import 'package:bookia/core/utils/themes/app_themes.dart';
 import 'package:flutter/material.dart';
 
@@ -8,8 +8,9 @@ class Bookia extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+      routerConfig: AppRouter.router,
       theme: AppThemes.lightTheme,
       themeMode: ThemeMode.light,
       builder: (context, child) {
@@ -24,15 +25,6 @@ class Bookia extends StatelessWidget {
           ),
         );
       },
-      home: const Scaffold(
-        //TODO: this widget for testing purposes, replace with SplashScreen() when finish initialization
-        body: Center(
-          child: Text(
-            'Welcome to Bookia!',
-            style: AppStyles.headline,
-          ),
-        ),
-      ), //SplashScreen(),
     );
   }
 }
