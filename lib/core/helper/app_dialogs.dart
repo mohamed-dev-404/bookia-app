@@ -16,7 +16,7 @@ class AppDialogs {
       barrierDismissible: false,
       barrierColor: AppColors.darkColor.withValues(alpha: 0.7),
       builder: (context) =>
-          Center(child: Lottie.asset(AppLotties.loadingJson, height: 50)),
+          Center(child: Lottie.asset(AppLotties.loadingJson, height: 80)),
     );
   }
 }
