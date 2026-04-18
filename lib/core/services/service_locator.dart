@@ -5,6 +5,9 @@ import 'package:bookia/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:bookia/features/auth/presentation/view_model/forget_password_cubit/forget_password_cubit.dart';
 import 'package:bookia/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 import 'package:bookia/features/auth/presentation/view_model/register_cubit/register_cubit.dart';
+import 'package:bookia/features/profile/data/repo/profile_repo.dart';
+import 'package:bookia/features/profile/data/repo/profile_repo_impl.dart';
+import 'package:bookia/features/splash/view_model/splash_cubit.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 
@@ -26,17 +29,29 @@ void setupServiceLocator() {
   );
 
   //? Login Cubit
-  getIt.registerLazySingleton<LoginCubit>(
+  getIt.registerFactory<LoginCubit>(
     () => LoginCubit(authRepo: getIt<AuthRepo>()),
   );
 
   //? Register Cubit
-  getIt.registerLazySingleton<RegisterCubit>(
+  getIt.registerFactory<RegisterCubit>(
     () => RegisterCubit(authRepo: getIt<AuthRepo>()),
   );
 
   //? Forget Password Cubit
-  getIt.registerLazySingleton<ForgetPasswordCubit>(
+  getIt.registerFactory<ForgetPasswordCubit>(
     () => ForgetPasswordCubit(authRepo: getIt<AuthRepo>()),
+  );
+
+  //! Profile Feature
+
+  //? Profile Repo
+  getIt.registerLazySingleton<ProfileRepo>(
+    () => ProfileRepoImpl(getIt<ApiConsumer>()),
+  );
+
+  //? Splash Cubit
+  getIt.registerFactory<SplashCubit>(
+    () => SplashCubit(profileRepo: getIt<ProfileRepo>()),
   );
 }

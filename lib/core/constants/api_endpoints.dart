@@ -23,8 +23,8 @@ class EndPoints {
   // static String unenrollCourse(String courseId) =>
   //     'enrollments/my-courses/$courseId';
 
-  // //? --- Profile  --- ;
-  // static const String getProfile = 'users/profile';
+  //? --- Profile  --- ;
+  static const String getProfile = '/profile';
   // static const String updateProfile = 'users/profile';
   // static const String createUploadUrl = 'users/profile-picture/presigned-url';
   // static const String saveProfilePic = 'users/profile-picture';
