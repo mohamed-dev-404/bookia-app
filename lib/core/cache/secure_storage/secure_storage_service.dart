@@ -90,8 +90,12 @@ class SecureStorageService {
   //! ===============================
 
   //* Save access token
-  Future<void> saveAccessToken(String token) async {
-    await setString(SecureStorageKeys.accessToken, token);
+  Future<void> saveAccessToken(String? token) async {
+    if (token != null) {
+      await setString(SecureStorageKeys.accessToken, token);
+    } else {
+      AppLogger.error('Token is null', tag: 'SecureStorage');
+    }
   }
 
   //* Get access token
@@ -105,8 +109,12 @@ class SecureStorageService {
   }
 
   //* Save refresh token
-  Future<void> saveRefreshToken(String token) async {
-    await setString(SecureStorageKeys.refreshToken, token);
+  Future<void> saveRefreshToken(String? token) async {
+    if (token != null) {
+      await setString(SecureStorageKeys.refreshToken, token);
+    } else {
+      AppLogger.error('Token is null', tag: 'SecureStorage');
+    }
   }
 
   //* Get refresh token
@@ -120,8 +128,12 @@ class SecureStorageService {
   }
 
   //* Save user role
-  Future<void> saveUserRole(String role) async {
-    await setString(SecureStorageKeys.role, role);
+  Future<void> saveUserRole(String? role) async {
+    if (role != null) {
+      await setString(SecureStorageKeys.role, role);
+    } else {
+      AppLogger.error('role is null', tag: 'SecureStorage');
+    }
   }
 
   //* Get user role
