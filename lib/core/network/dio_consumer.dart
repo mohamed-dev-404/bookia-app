@@ -17,11 +17,12 @@ class DioConsumer extends ApiConsumer {
   DioConsumer(this.dio) {
     dio.options.baseUrl = AppConstants.baseUrl;
     dio.options
-      ..connectTimeout = const Duration(seconds: 20)
-      ..receiveTimeout = const Duration(seconds: 20);
+      ..connectTimeout = const Duration(seconds: 10)
+      ..receiveTimeout = const Duration(seconds: 10)
+      ..sendTimeout = const Duration(seconds: 10);
     dio.interceptors.add(HeaderInterceptor());
     dio.interceptors.add(NetworkInterceptor(Connectivity()));
-    dio.interceptors.add(RetryInterceptor(dio, maxRetries: 5));
+    dio.interceptors.add(RetryInterceptor(dio, maxRetries: 3));
     if (!kReleaseMode) {
       dio.interceptors.add(DioLogger());
     }
@@ -33,12 +34,14 @@ class DioConsumer extends ApiConsumer {
     String path, {
     Object? data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
   }) async {
     try {
       final response = await dio.get(
         path,
         data: data,
         queryParameters: queryParameters,
+        options: Options(headers: headers),
       );
       return response.data;
     } catch (e) {
@@ -52,6 +55,7 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
     bool isFormData = false,
   }) async {
     try {
@@ -59,6 +63,7 @@ class DioConsumer extends ApiConsumer {
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
+        options: Options(headers: headers),
       );
       return response.data;
     } catch (e) {
@@ -72,6 +77,7 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
     bool isFormData = false,
   }) async {
     try {
@@ -79,6 +85,7 @@ class DioConsumer extends ApiConsumer {
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
+        options: Options(headers: headers),
       );
       return response.data;
     } catch (e) {
@@ -92,6 +99,7 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
     bool isFormData = false,
   }) async {
     try {
@@ -99,6 +107,7 @@ class DioConsumer extends ApiConsumer {
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
+        options: Options(headers: headers),
       );
       return response.data;
     } catch (e) {
@@ -112,6 +121,7 @@ class DioConsumer extends ApiConsumer {
     String path, {
     dynamic data,
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
     bool isFormData = false,
   }) async {
     try {
@@ -119,6 +129,7 @@ class DioConsumer extends ApiConsumer {
         path,
         data: isFormData ? FormData.fromMap(data) : data,
         queryParameters: queryParameters,
+        options: Options(headers: headers),
       );
       return response.data;
     } catch (e) {
