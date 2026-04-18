@@ -1,4 +1,3 @@
-
 import 'package:bookia/core/constants/api_keys.dart';
 
 class ErrorModel {
@@ -11,25 +10,48 @@ class ErrorModel {
   });
 
   factory ErrorModel.fromJson(Map<String, dynamic> json) {
-    String message = '';
+    final List<String> messages = [];
 
-    //! 1. Handle validation errors (list of messages)
-    if (json[ApiKeys.validationErrors] != null &&
-        json[ApiKeys.validationErrors] is List) {
-      final List<dynamic> errors = json[ApiKeys.validationErrors];
-      message = errors.join('\n');
+    // 1. Extract detailed errors from the 'errors' map
+    final dynamic errorsObject = json[ApiKeys.errors];
+
+    if (errorsObject is Map) {
+      for (var value in errorsObject.values) {
+        if (value is List) {
+          messages.addAll(value.map((e) => e.toString()));
+        } else {
+          messages.add(value.toString());
+        }
+      }
     }
-    //! 2. Handle single error message (String)
-    else if (json[ApiKeys.message] != null) {
-      message = json[ApiKeys.message].toString();
+
+    // 2. Fallback to main 'message' if no specific detailed errors are found
+    if (messages.isEmpty && json[ApiKeys.message] != null) {
+      final String mainMessage = json[ApiKeys.message].toString();
+      if (mainMessage.isNotEmpty) {
+        messages.add(mainMessage);
+      }
     }
-    //! 3. Fallback if no error message exists
-    else {
-      message = 'Unexpected error occurred';
+
+    // 3. Ultimate fallback if empty
+    if (messages.isEmpty) {
+      messages.add('Unexpected error occurred');
+    }
+
+    // Extract status code
+    int? parsedStatusCode;
+    final statusVal = json[ApiKeys.status];
+    if (statusVal != null) {
+      if (statusVal is int) {
+        parsedStatusCode = statusVal;
+      } else {
+        parsedStatusCode = int.tryParse(statusVal.toString());
+      }
     }
 
     return ErrorModel(
-      errorMessage: message,
+      errorMessage: messages.join('\n'),
+      statusCode: parsedStatusCode,
     );
   }
 }

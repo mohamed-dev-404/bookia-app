@@ -65,7 +65,7 @@ class AppThemes {
       type: BottomNavigationBarType.fixed,
       selectedItemColor: AppColors.primaryColor,
       unselectedItemColor: AppColors.greyColor,
-      backgroundColor: Colors.transparent,
+      backgroundColor: AppColors.backgroundColor,
       selectedLabelStyle: AppStyles.caption2.copyWith(
         fontWeight: FontWeight.w600,
         height: 2,
