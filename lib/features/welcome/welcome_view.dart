@@ -1,3 +1,5 @@
+import 'package:bookia/core/routes/navigations_helper.dart';
+import 'package:bookia/core/routes/routes.dart';
 import 'package:bookia/core/utils/assets/app_images.dart';
 import 'package:bookia/core/utils/colors/app_colors.dart';
 import 'package:bookia/core/utils/styles/app_styles.dart';
@@ -35,7 +37,7 @@ class WelcomeView extends StatelessWidget {
                 MainButton(
                   text: 'Login',
                   onPressed: () {
-                    //TODO    pushTo(context, LoginScreen());
+                    push(context, Routes.login);
                   },
                 ),
                 const Gap(15),
@@ -45,7 +47,7 @@ class WelcomeView extends StatelessWidget {
                   textColor: AppColors.darkColor,
                   text: 'Register',
                   onPressed: () {
-                    //TODO    pushTo(context, RegisterScreen());
+                    push(context, Routes.register);
                   },
                 ),
                 const Spacer(),
