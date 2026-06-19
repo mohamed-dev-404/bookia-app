@@ -13,6 +13,15 @@ class ApiKeys {
   static const String status = 'status';
   static const String validationErrors = 'validationErrors';
   static const String name = 'name';
+  static const String sliders = 'sliders';
+  static const String products = 'products';
+  static const String description = 'description';
+  static const String price = 'price';
+  static const String discount = 'discount';
+  static const String priceAfterDiscount = 'price_after_discount';
+  static const String stock = 'stock';
+  static const String bestSeller = 'best_seller';
+  static const String category = 'category';
 
   //? User Model Keys
   static const String email = 'email';
