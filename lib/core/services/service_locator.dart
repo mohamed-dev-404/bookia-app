@@ -5,6 +5,8 @@ import 'package:bookia/features/auth/data/repo/auth_repo_impl.dart';
 import 'package:bookia/features/auth/presentation/view_model/forget_password_cubit/forget_password_cubit.dart';
 import 'package:bookia/features/auth/presentation/view_model/login_cubit/login_cubit.dart';
 import 'package:bookia/features/auth/presentation/view_model/register_cubit/register_cubit.dart';
+import 'package:bookia/features/home/data/repo/home_repo.dart';
+import 'package:bookia/features/home/data/repo/home_repo_impl.dart';
 import 'package:bookia/features/profile/data/repo/profile_repo.dart';
 import 'package:bookia/features/profile/data/repo/profile_repo_impl.dart';
 import 'package:bookia/features/splash/view_model/splash_cubit.dart';
@@ -53,5 +55,12 @@ void setupServiceLocator() {
   //? Splash Cubit
   getIt.registerFactory<SplashCubit>(
     () => SplashCubit(profileRepo: getIt<ProfileRepo>()),
+  );
+
+  //! Home Feature
+
+  //? Home Repo
+  getIt.registerLazySingleton<HomeRepo>(
+    () => HomeRepoImpl(getIt<ApiConsumer>()),
   );
 }
